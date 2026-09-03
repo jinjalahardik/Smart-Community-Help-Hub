@@ -1,28 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /*
-   * Semantic theme tokens as CSS custom properties. Most components consume
-   * theme-aware colors via Tailwind's `dark:` variant against the palette
-   * defined in tailwind.config.js (which itself now mirrors these values),
-   * but these variables exist as the single source of truth for anything
-   * that needs raw CSS (scrollbars, box-shadow glows, third-party chart
-   * theming) and to keep the token names explicit in one place.
-   */
   :root {
+    --bg-primary: #F8FAFA;
+    --bg-secondary: #ECFDFB;
+    --text-primary: #10221F;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+    --card: #FFFFFF;
+    --card-border: rgba(15, 118, 110, 0.16);
+
     --background: #F8FAFA;
     --background-secondary: #ECFDFB;
     --surface: #FFFFFF;
     --surface-elevated: #FFFFFF;
     --surface-soft: #ECFDFB;
-
-    --text-primary: #10221F;
-    --text-secondary: #64748B;
-    --text-muted: #94A3B8;
 
     --primary: #0F766E;
     --primary-hover: #115E59;
@@ -32,24 +28,28 @@
     --warning: #F59E0B;
     --success: #059669;
 
-    --border: rgba(15, 118, 110, 0.14);
-    --border-hover: rgba(15, 118, 110, 0.35);
+    --border: rgba(15, 118, 110, 0.16);
+    --border-hover: rgba(15, 118, 110, 0.38);
 
     --shadow: rgba(12, 33, 30, 0.12);
-    --primary-glow: rgba(15, 118, 110, 0.12);
-    --emergency-glow: rgba(244, 63, 94, 0.12);
+    --primary-glow: rgba(15, 118, 110, 0.16);
+    --emergency-glow: rgba(244, 63, 94, 0.16);
   }
 
   .dark {
+    --bg-primary: #081411;
+    --bg-secondary: #0D1D19;
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --text-muted: #829A94;
+    --card: #112824;
+    --card-border: rgba(45, 212, 191, 0.18);
+
     --background: #081411;
     --background-secondary: #0D1D19;
     --surface: #112824;
     --surface-elevated: #17332D;
     --surface-soft: #1B3B34;
-
-    --text-primary: #F1F8F6;
-    --text-secondary: #BDD0CB;
-    --text-muted: #829A94;
 
     --primary: #2DD4BF;
     --primary-hover: #5EEAD4;
@@ -59,12 +59,12 @@
     --warning: #FBBF24;
     --success: #34D399;
 
-    --border: rgba(148, 210, 198, 0.14);
-    --border-hover: rgba(45, 212, 191, 0.38);
+    --border: rgba(148, 210, 198, 0.18);
+    --border-hover: rgba(45, 212, 191, 0.42);
 
-    --shadow: rgba(0, 0, 0, 0.35);
-    --primary-glow: rgba(45, 212, 191, 0.16);
-    --emergency-glow: rgba(251, 90, 117, 0.16);
+    --shadow: rgba(0, 0, 0, 0.45);
+    --primary-glow: rgba(45, 212, 191, 0.22);
+    --emergency-glow: rgba(251, 90, 117, 0.22);
   }
 
   * { @apply border-teal-100 dark:border-teal-200/[0.14]; }
@@ -78,16 +78,8 @@
     --toast-bg: #17332D;
     --toast-color: #F1F8F6;
   }
-  h1, h2, h3, h4, h5, h6 { @apply font-display; }
+  h1, h2, h3, h4, h5, h6 { @apply font-display tracking-tight; }
 
-  /*
-   * Themed, GPU-cheap transitions on the properties that actually change
-   * between light/dark (color-ish + shadow), rather than `transition: all`,
-   * which would also animate layout-affecting properties (width, height,
-   * margin, transform, etc.) and cause jank. The universal selector here is
-   * inexpensive for browsers to match; it is the unrestricted property list
-   * of `transition: all` that is the actual performance risk, not `*`.
-   */
   *, *::before, *::after {
     transition-property: background-color, color, border-color, box-shadow, fill, stroke;
     transition-duration: 220ms;
@@ -98,13 +90,6 @@
     @apply outline-none ring-2 ring-teal-500 dark:ring-teal-400 ring-offset-2 ring-offset-surface-light dark:ring-offset-surface-dark;
   }
 
-  /*
-   * Chrome fires an `animationstart` event when it autofills an input that
-   * has an animation name. We listen for this on the login form (see
-   * pages/auth/Login.jsx) to clear any browser prefill on initial load so a
-   * stray saved value (e.g. "hero") can never appear in the email field.
-   * This only names the animation — it does not change visual appearance.
-   */
   @keyframes schh-autofill {
     from { }
     to { }
@@ -122,7 +107,7 @@
     }
   }
 
-  /* Themed scrollbars (WebKit + Firefox) */
+  /* Themed scrollbars */
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--text-muted) transparent;
@@ -139,7 +124,16 @@
 
 @layer components {
   .glass-panel {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    @apply bg-white/70 dark:bg-teal-950/40 backdrop-blur-xl border border-white/40 dark:border-teal-400/15 shadow-glass;
+  }
+  .glass-card {
+    @apply bg-white/85 dark:bg-surface-elevated/85 backdrop-blur-2xl border border-teal-200/50 dark:border-teal-400/15 shadow-glass dark:shadow-glass-dark rounded-[24px];
+  }
+  .bento-card {
+    @apply relative overflow-hidden rounded-[24px] border border-teal-200/60 dark:border-teal-400/20 bg-white/80 dark:bg-surface-card/90 backdrop-blur-xl transition-all duration-300;
+  }
+  .frosted-square {
+    @apply flex items-center justify-center rounded-2xl border border-teal-300/40 bg-teal-500/10 dark:bg-teal-400/15 backdrop-blur-md shadow-sm;
   }
   .container-app {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -150,4 +144,72 @@
   }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* 3D tilt glare effect */
+  .glare-overlay {
+    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+  }
+
+  /* Spotlight mouse-tracking card backdrop */
+  .spotlight-card {
+    position: relative;
+    overflow: hidden;
+  }
+  .spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(500px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(20, 184, 166, 0.18), transparent 40%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
+}
+
+/* CRITICAL FIX - Makes Chrome autofill text visible in Light & Dark mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: #0f172a !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+  box-shadow: inset 0 0 20px 20px #ffffff !important;
+}
+
+html.dark input:-webkit-autofill,
+html.dark input:-webkit-autofill:hover,
+html.dark input:-webkit-autofill:focus,
+html.dark input:-webkit-autofill:active {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: inset 0 0 20px 20px #0f172a !important;
+}
+
+/* CSS Floating label rules for focus, non-empty, and autofill */
+.auth-input:focus ~ .auth-label,
+.auth-input:not(:placeholder-shown) ~ .auth-label,
+.auth-input:-webkit-autofill ~ .auth-label,
+input:-webkit-autofill + label,
+input:-webkit-autofill:hover + label,
+input:-webkit-autofill:focus + label,
+input:-webkit-autofill:active + label {
+  top: 0.5rem !important; /* top-2 */
+  transform: translateY(0) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #0f766e !important;
+}
+
+html.dark .auth-input:focus ~ .auth-label,
+html.dark .auth-input:not(:placeholder-shown) ~ .auth-label,
+html.dark .auth-input:-webkit-autofill ~ .auth-label,
+html.dark input:-webkit-autofill + label,
+html.dark input:-webkit-autofill:hover + label,
+html.dark input:-webkit-autofill:focus + label,
+html.dark input:-webkit-autofill:active + label {
+  color: #2dd4bf !important;
 }

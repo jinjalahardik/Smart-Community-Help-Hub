@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,40 +27,10 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const { register, handleSubmit, setValue, reset, formState: { errors, isSubmitting } } = useForm({
+  const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '', rememberMe: false },
   });
-
-  // The login form must ALWAYS start empty. Browsers (especially Chrome) may
-  // autofill these fields on page load with a previously saved value (e.g. a
-  // stray "hero" token), which would otherwise show inside the email input.
-  // We reset once on mount so any browser prefill is cleared while still
-  // allowing legitimate autofill suggestions once the user focuses. This runs
-  // immediately (not on a timer) so it can never race with fast typing.
-  useEffect(() => {
-    reset({ email: '', password: '', rememberMe: false });
-  }, [reset]);
-
-  // Browser autofill can also fire slightly after first paint. Chrome exposes
-  // this via an `animationstart` event (see the `schh-autofill` keyframe in
-  // styles/index.css). During the initial-load window we clear any such
-  // prefill; after that window, normal autofill-on-focus still works.
-  useEffect(() => {
-    const onAnimationStart = (e) => {
-      if (e.animationName !== 'schh-autofill') return;
-      const el = e.target;
-      if (el && el.matches && (el.matches('input[type="email"]') || el.matches('input[type="password"]'))) {
-        reset({ email: '', password: '', rememberMe: false });
-      }
-    };
-    document.addEventListener('animationstart', onAnimationStart);
-    const stop = setTimeout(() => document.removeEventListener('animationstart', onAnimationStart), 5000);
-    return () => {
-      document.removeEventListener('animationstart', onAnimationStart);
-      clearTimeout(stop);
-    };
-  }, [reset]);
 
   const onSubmit = async (data) => {
     try {
@@ -121,16 +90,16 @@ export default function Login() {
           type="submit"
           size="lg"
           loading={isSubmitting}
-          className="group relative w-full overflow-hidden bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-600 shadow-[0_8px_24px_-6px_rgba(15,118,110,0.5)] hover:shadow-[0_10px_32px_-4px_rgba(45,212,191,0.55)]"
+          className="group relative w-full overflow-hidden bg-gradient-to-r from-teal-700 via-teal-600 to-cyan-600 shadow-[0_8px_24px_-6px_rgba(15,118,110,0.5)] hover:shadow-[0_12px_36px_-4px_rgba(45,212,191,0.6)] font-semibold"
         >
           <span className="relative">Log In</span>
           <ArrowRight
-            className="relative h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+            className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5"
             aria-hidden="true"
           />
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
+            className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
           />
         </Button>
       </form>

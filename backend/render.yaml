@@ -1,0 +1,33 @@
+# Render Blueprint — backend API for Smart Community Help Hub
+# For one-click deploy: Render Dashboard -> New -> Blueprint -> select this repo.
+# Fill in the env vars in the Render dashboard (never commit secrets).
+services:
+  - type: web
+    name: schub-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node src/server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CLIENT_URL
+        value: https://schub-frontend.vercel.app
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      # Secrets — set these in the Render dashboard:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: SECURE_COOKIES
+        value: "true"
+      # Optional SMTP
+      # - key: SMTP_HOST
+      # - key: SMTP_PORT
+      # - key: SMTP_USER
+      # - key: SMTP_PASS
+      # - key: SMTP_FROM

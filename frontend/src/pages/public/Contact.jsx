@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Mail, Phone, MapPin, CheckCircle2, AlertTriangle, Send, Sparkles } from 'lucide-react';
 import Section, { SectionHeading } from '../../components/shared/Section';
 import { Card } from '../../components/ui/Card';
 import Input from '../../components/ui/Input';
@@ -43,61 +43,79 @@ export default function Contact() {
   };
 
   return (
-    <Section className="pt-14">
-      <Reveal><SectionHeading eyebrow="Get in touch" title="Contact Us" description="Questions about donating, volunteering, or partnering as an NGO or hospital? We'd love to hear from you." /></Reveal>
-      <div className="grid lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    <Section className="pt-16 pb-20">
+      <Reveal>
+        <SectionHeading
+          eyebrow="Get in touch"
+          title="Contact Us"
+          description="Questions about donating, volunteering, or partnering as an NGO or hospital? We'd love to hear from you."
+        />
+      </Reveal>
+      <div className="grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {/* LEFT CONTACT CARDS & MINI MAP */}
         <RevealGroup className="space-y-4" stagger={0.1}>
           {[
-            { icon: Mail, title: 'Email', value: 'support@helpconnect.demo' },
-            { icon: Phone, title: 'Phone', value: '+91 79 4000 1234' },
-            { icon: MapPin, title: 'Office', value: 'Piplod, Surat, Gujarat 395007' },
+            { icon: Mail, title: 'Email', value: 'support@helpconnect.demo', color: 'from-teal-500 to-cyan-600' },
+            { icon: Phone, title: 'Phone', value: '+91 79 4000 1234', color: 'from-amber-500 to-orange-600' },
+            { icon: MapPin, title: 'Office', value: 'Piplod, Surat, Gujarat 395007', color: 'from-emerald-500 to-teal-600' },
           ].map((c) => (
             <RevealItem key={c.title} direction="left">
-              <Card hover className="p-5 flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-900/40 flex items-center justify-center shrink-0">
-                  <c.icon className="w-5 h-5 text-teal-600" />
-                </div>
-                <div>
-                  <p className="text-xs text-ink-light/65 dark:text-ink-dark/65">{c.title}</p>
-                  <p className="text-sm font-medium">{c.value}</p>
-                </div>
-              </Card>
+              <motion.div whileHover={{ y: -4, scale: 1.02 }}>
+                <Card hover className="p-5 flex items-center gap-4 rounded-2xl border-teal-200/60 dark:border-teal-800/60 group">
+                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${c.color} text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-110 transition-transform`}>
+                    <c.icon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider">{c.title}</p>
+                    <p className="text-sm font-bold text-ink-light dark:text-ink-dark mt-0.5">{c.value}</p>
+                  </div>
+                </Card>
+              </motion.div>
             </RevealItem>
           ))}
+
+          {/* MINI MAP SIMULATION GRAPHIC */}
           <RevealItem direction="left">
-            <Card className="p-5 bg-teal-50/60 dark:bg-teal-900/20">
-              <p className="text-xs font-semibold text-teal-700 dark:text-teal-300 mb-2">Office Hours</p>
-              <div className="space-y-1 text-sm text-ink-light/70 dark:text-ink-dark/70">
-                <div className="flex justify-between"><span>Mon – Fri</span><span>9:00 AM – 7:00 PM</span></div>
-                <div className="flex justify-between"><span>Saturday</span><span>10:00 AM – 4:00 PM</span></div>
-                <div className="flex justify-between"><span>Sunday</span><span>Closed</span></div>
+            <div className="p-5 rounded-[24px] bento-card bg-gradient-to-br from-teal-950 via-[#061815] to-slate-950 text-white relative overflow-hidden border border-teal-500/20 shadow-premium">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-300 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-teal-400" /> Surat Regional Office
+                </span>
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-400" />
+                </span>
               </div>
-              <p className="text-xs text-coral-600 dark:text-coral-300 mt-3 font-medium">Emergency requests are handled 24/7.</p>
-            </Card>
+              <p className="text-xs text-teal-100/80 font-body leading-relaxed">
+                Piplod HQ Coordination Hub · 24/7 Live Emergency Monitoring Line Active
+              </p>
+            </div>
           </RevealItem>
         </RevealGroup>
 
+        {/* RIGHT CONTACT FORM */}
         <Reveal direction="right" className="lg:col-span-2">
-          <Card className="p-7 relative overflow-hidden">
+          <div className="p-8 rounded-[28px] bento-card bg-white/90 dark:bg-surface-card/90 border border-teal-200/60 dark:border-teal-400/20 shadow-premium backdrop-blur-2xl relative overflow-hidden">
             <AnimatePresence mode="wait">
               {sent ? (
                 <motion.div
                   key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.92 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
                   transition={{ duration: 0.3 }}
-                  className="flex flex-col items-center justify-center text-center py-10"
+                  className="flex flex-col items-center justify-center text-center py-12"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 15, delay: 0.1 }}
+                    className="w-16 h-16 rounded-full bg-teal-500/15 text-teal-600 flex items-center justify-center mb-4 shadow-glow-teal"
                   >
-                    <CheckCircle2 className="w-12 h-12 text-teal-600 mb-3" />
+                    <CheckCircle2 className="w-8 h-8" />
                   </motion.div>
-                  <p className="font-display font-semibold">Message sent</p>
-                  <p className="text-sm text-ink-light/60 dark:text-ink-dark/60 mt-1">We'll get back to you within 24 hours.</p>
+                  <p className="font-display font-extrabold text-2xl text-ink-light dark:text-ink-dark">Message Sent Successfully!</p>
+                  <p className="text-sm text-ink-light/75 dark:text-ink-dark/75 mt-2 font-body">Our team will respond to your inquiry within 24 hours.</p>
                 </motion.div>
               ) : (
                 <motion.form
@@ -107,28 +125,32 @@ export default function Contact() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   onSubmit={handleSubmit(onSubmit)}
-                  className="space-y-4"
+                  className="space-y-5"
                 >
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <Input label="Your Name" required {...register('name')} error={errors.name?.message} />
-                    <Input label="Email Address" type="email" required {...register('email')} error={errors.email?.message} />
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <Input label="Your Name" required {...register('name')} error={errors.name?.message} className="rounded-2xl" />
+                    <Input label="Email Address" type="email" required {...register('email')} error={errors.email?.message} className="rounded-2xl" />
                   </div>
-                  <Textarea label="Message" required rows={5} {...register('message')} error={errors.message?.message} />
+                  <Textarea label="Message" required rows={5} {...register('message')} error={errors.message?.message} className="rounded-2xl" />
                   {submitError && (
                     <motion.div
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
                       role="alert"
-                      className="flex items-center gap-2 text-sm text-coral-600 dark:text-coral-300 bg-coral-50 dark:bg-coral-900/20 rounded-xl px-3.5 py-2.5"
+                      className="flex items-center gap-2 text-sm font-semibold text-rose-600 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 rounded-xl px-4 py-3 border border-rose-300/40"
                     >
                       <AlertTriangle className="w-4 h-4 shrink-0" /> {submitError}
                     </motion.div>
                   )}
-                  <Button type="submit" loading={isSubmitting}>Send Message</Button>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button type="submit" loading={isSubmitting} icon={Send} iconPosition="right" size="lg" className="w-full bg-gradient-to-r from-teal-700 via-teal-600 to-cyan-600 font-bold py-3.5 shadow-glow-primary rounded-2xl">
+                      Send Message
+                    </Button>
+                  </motion.div>
                 </motion.form>
               )}
             </AnimatePresence>
-          </Card>
+          </div>
         </Reveal>
       </div>
     </Section>
