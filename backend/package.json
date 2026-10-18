@@ -11,6 +11,7 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "seed": "node src/seed.js",
+    "sync:shared": "node scripts/sync-shared.mjs",
     "test": "node tests/phase6_full_regression.mjs"
   },
   "dependencies": {

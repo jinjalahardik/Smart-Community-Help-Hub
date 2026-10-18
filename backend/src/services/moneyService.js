@@ -35,7 +35,7 @@ import { sendMoneyReceiptEmail } from './email.js';
 import {
   CELEBRATION_OCCASIONS,
   CELEBRATION_CAUSES,
-} from '../../../frontend/src/constants/celebrations.js';
+} from '../shared/constants/celebrations.js';
 
 export const ALLOWED_CAUSES = ['food', 'clothes', 'medicine', 'blood'];
 export const MIN_AMOUNT = 10;

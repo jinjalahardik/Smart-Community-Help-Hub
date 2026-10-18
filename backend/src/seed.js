@@ -4,7 +4,7 @@ import {
   buildSeedUsers, buildSeedNgos, buildSeedHospitals, buildSeedDonations,
   buildSeedRequests, buildSeedTasks, buildSeedInventory, buildSeedNotifications,
   buildSeedFeedback, buildSeedChats, buildSeedAuditLogs,
-} from '../../frontend/src/services/seedData.js';
+} from './shared/services/seedData.js';
 import {
   User, Ngo, Hospital, Donation, Request, Task, InventoryItem,
   Notification, Feedback, Chat, Message, AuditLog, Requirement,
@@ -18,7 +18,7 @@ const ALL_MODELS = [
   CelebrationCampaign,
 ];
 
-// Seeds the same demo data the frontend mock used (from frontend/src/services/seedData.js),
+// Seeds the same demo data the frontend mock used (shared/services/seedData.js),
 // so the real backend behaves identically to the demo. Passwords are bcrypt-hashed.
 export async function seedDatabase({ force = false } = {}) {
   const existing = await User.estimatedDocumentCount();

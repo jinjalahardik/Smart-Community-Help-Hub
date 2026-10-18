@@ -1,7 +1,7 @@
 import {
   User, Ngo, Hospital, Donation, Request, AuditLog, Notification,
 } from '../models/index.js';
-import { VERIFICATION_STATUS, USER_STATUS } from '../../../frontend/src/constants/categories.js';
+import { VERIFICATION_STATUS, USER_STATUS } from '../shared/constants/categories.js';
 import { createWithRetry } from '../utils/id.js';
 import { sendToUser } from '../services/sse.js';
 

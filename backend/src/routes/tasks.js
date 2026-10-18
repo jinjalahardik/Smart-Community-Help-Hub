@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { Task } from '../models/index.js';
 import { makeResource } from '../controllers/crud.js';
 import { requireAuth } from '../middleware/auth.js';
-import { TASK_STATUS, TASK_STATUS_ORDER } from '../../../frontend/src/constants/categories.js';
+import { TASK_STATUS, TASK_STATUS_ORDER } from '../shared/constants/categories.js';
 import { sendToUser } from '../services/sse.js';
 
 const router = Router();

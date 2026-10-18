@@ -4,8 +4,8 @@ import { User, Ngo, Hospital } from '../models/index.js';
 import { createWithRetry } from '../utils/id.js';
 import { sendOtpEmail, sendWelcomeEmail } from '../services/email.js';
 import { issueOtp, verifyOtp as verifyOtpCode, createResetGrant, consumeResetGrant } from '../services/otp.js';
-import { ORG_ROLES } from '../../../frontend/src/constants/roles.js';
-import { USER_STATUS, VERIFICATION_STATUS } from '../../../frontend/src/constants/categories.js';
+import { ORG_ROLES } from '../shared/constants/roles.js';
+import { USER_STATUS, VERIFICATION_STATUS } from '../shared/constants/categories.js';
 
 const DEV_SECRET = 'sch_hub_local_dev_secret_change_in_production';
 if (process.env.NODE_ENV === 'production') {

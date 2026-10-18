@@ -1,6 +1,6 @@
-// Shared ID generator. Delegates to the frontend's seedData module so that
-// records created at runtime use the same format as the seeded demo IDs.
-import { nextId } from '../../../frontend/src/services/seedData.js';
+// Shared ID generator. Uses the shared seedData module (mirrored from the
+// frontend's services/seedData.js) so runtime records match seeded demo IDs.
+import { nextId } from '../shared/services/seedData.js';
 
 export { nextId };
 

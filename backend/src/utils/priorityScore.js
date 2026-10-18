@@ -1,4 +1,4 @@
-import { URGENCY_WEIGHT } from '../../../frontend/src/constants/categories.js';
+import { URGENCY_WEIGHT } from '../shared/constants/categories.js';
 
 // Mirrors the frontend's calculatePriorityScore (src/utils/priorityScore.js).
 // Score is 0-100: urgency (0-55) + affected people (0-25) + time (5-20).
