@@ -1,4 +1,4 @@
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { HeartHandshake, ChevronsLeft, Settings, LogOut } from 'lucide-react';
@@ -31,7 +31,11 @@ export default function Sidebar() {
         collapsed ? 'w-[76px]' : 'w-64'
       )}
     >
-      <div className="flex items-center gap-2.5 px-4 h-16 border-b border-teal-100 dark:border-teal-200/[0.14] shrink-0">
+      <Link
+        to={PATHS.HOME}
+        aria-label="Go to Smart Community Help Hub home"
+        className="flex items-center gap-2.5 px-4 h-16 border-b border-teal-100 dark:border-teal-200/[0.14] shrink-0"
+      >
         <motion.div
           initial={{ rotate: -8, scale: 0.9 }}
           animate={{ rotate: 0, scale: 1 }}
@@ -41,7 +45,7 @@ export default function Sidebar() {
           <HeartHandshake className="w-5 h-5 text-white" />
         </motion.div>
         {!collapsed && <span className="font-display font-bold text-sm leading-tight">Smart Community<br />Help Hub</span>}
-      </div>
+      </Link>
 
       <nav className="flex-1 overflow-y-auto py-3 px-2.5 space-y-1 no-scrollbar" aria-label="Primary navigation">
         {items.map((item) => {

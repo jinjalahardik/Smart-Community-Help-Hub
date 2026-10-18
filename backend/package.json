@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "seed": "node src/seed.js"
+    "seed": "node src/seed.js",
+    "test": "node tests/phase6_full_regression.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
@@ -25,6 +26,7 @@
     "mongoose": "^8.9.0",
     "morgan": "^1.10.0",
     "multer": "^2.2.0",
-    "nodemailer": "^9.0.3"
+    "nodemailer": "^9.0.3",
+    "razorpay": "^2.9.8"
   }
 }

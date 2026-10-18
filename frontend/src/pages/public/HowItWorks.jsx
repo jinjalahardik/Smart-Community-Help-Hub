@@ -1,10 +1,11 @@
 import { UserPlus, PackagePlus, ShieldCheck, Truck, CheckCircle2, Siren, Sparkles } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import Section, { SectionHeading } from '../../components/shared/Section';
+import Section from '../../components/shared/Section';
 import { Card } from '../../components/ui/Card';
 import Tabs from '../../components/ui/Tabs';
 import Reveal from '../../components/shared/Reveal';
+import HowItWorksStepCards from '../../components/HowItWorksCards';
 
 const DONOR_FLOW = [
   { icon: UserPlus, title: 'Create your donor account', desc: 'Sign up in under two minutes with your basic details.' },
@@ -30,38 +31,29 @@ export default function HowItWorks() {
   return (
     <Section className="pt-16 pb-20">
       <Reveal>
-        <SectionHeading
-          eyebrow="Step by step"
-          title="How Smart Community Help Hub works"
-          description="Whether you're giving or receiving help, the process is designed to be fast, transparent and verified at every stage."
-        />
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <span className="inline-flex items-center font-mono font-bold text-[12px] tracking-[0.3em] uppercase text-[#0F766E] bg-[#CCFBF1] rounded-full px-4 py-2">
+            Step by step
+          </span>
+          <h2 className="font-sora text-[56px] text-[#020617] tracking-[-0.03em] font-bold mt-5">
+            How Smart Community Help Hub
+            <br />
+            <span className="font-serif italic relative">
+              works
+              <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#0F766E]" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M0 5 Q 12.5 0, 25 5 T 50 5 T 75 5 T 100 5" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" />
+              </svg>
+            </span>
+          </h2>
+          <p className="font-inter font-normal text-[20px] text-[#64748B] max-w-[650px] mx-auto mt-6 leading-[1.6]">
+            Whether you're giving or receiving help, the process is designed to be fast, transparent and verified at every stage.
+          </p>
+        </div>
       </Reveal>
 
-      {/* Interactive Process Stepper Summary Bar */}
+      {/* Step Cards */}
       <Reveal delay={0.1}>
-        <div className="flex items-center justify-between max-w-3xl mx-auto mb-12 relative px-4">
-          <div className="absolute top-1/2 left-8 right-8 h-1 bg-teal-200/50 dark:bg-teal-900/50 -translate-y-1/2 -z-0" aria-hidden="true" />
-          {flow.map((step, i) => {
-            const isActive = i <= activeStepIndex;
-            return (
-              <motion.button
-                key={step.title}
-                type="button"
-                onClick={() => setActiveStepIndex(i)}
-                whileHover={{ scale: 1.12 }}
-                whileTap={{ scale: 0.95 }}
-                className={`relative z-10 w-12 h-12 rounded-2xl flex items-center justify-center cursor-pointer transition-all duration-300 ${
-                  isActive
-                    ? 'bg-gradient-to-br from-teal-500 to-cyan-600 text-white shadow-glow-teal ring-4 ring-teal-500/20'
-                    : 'bg-white dark:bg-surface-elevated text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-400/20'
-                }`}
-                title={step.title}
-              >
-                <step.icon className="w-5 h-5" />
-              </motion.button>
-            );
-          })}
-        </div>
+        <HowItWorksStepCards />
       </Reveal>
 
       <Tabs

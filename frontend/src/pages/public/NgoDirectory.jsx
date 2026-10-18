@@ -1,9 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, MapPin, LayoutGrid, List, Building2, Phone, Mail, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { ShieldCheck, MapPin, LayoutGrid, List, Building2, Phone, Mail, ArrowRight, CheckCircle2 } from 'lucide-react';
 import Section, { SectionHeading } from '../../components/shared/Section';
-import { Card } from '../../components/ui/Card';
-import Avatar from '../../components/ui/Avatar';
 import { Badge } from '../../components/ui/Badge';
 import SearchInput from '../../components/ui/SearchInput';
 import Select from '../../components/ui/Select';
@@ -110,6 +108,7 @@ export default function NgoDirectory() {
               <motion.div
                 key={n.name}
                 layout
+                className="min-w-0"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}

@@ -41,14 +41,14 @@ export default function PublicFooter() {
 
       <div className="container-app relative z-10 py-16 grid grid-cols-1 md:grid-cols-5 gap-10">
         <div className="md:col-span-2 space-y-4">
-          <div className="flex items-center gap-3">
+          <Link to={PATHS.HOME} aria-label="Go to Smart Community Help Hub home" className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(45,212,191,0.4)]">
               <HeartHandshake className="w-5 h-5 text-white" />
             </div>
             <span className="font-display font-bold text-xl text-white tracking-tight">
               Smart Community <span className="bg-gradient-to-r from-teal-300 to-cyan-300 bg-clip-text text-transparent">Help Hub</span>
             </span>
-          </div>
+          </Link>
 
           <p className="text-sm text-teal-100/70 leading-relaxed max-w-sm">
             Connecting donors, NGOs, hospitals, volunteers and requesters to build a stronger, more responsive community support network across India.

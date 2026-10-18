@@ -9,6 +9,13 @@ const resource = makeResource(InventoryItem, {
   searchFields: ['itemName'],
   name: 'Inventory item',
   idPrefix: 'INV',
+  ownerField: 'ownerId',
+  allowedRoles: ['ngo', 'hospital', 'admin'],
+  beforeCreate: (data, req) => ({
+    ...data,
+    ownerId: req.user?.role === 'admin' ? (data.ownerId || req.user.orgId || req.user.id) : (req.user?.orgId || req.user?.id),
+    ownerType: req.user?.role === 'admin' ? (data.ownerType || 'admin') : req.user?.role,
+  }),
 });
 
 router.get('/', requireAuth, resource.list);

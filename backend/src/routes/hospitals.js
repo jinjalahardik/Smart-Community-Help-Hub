@@ -10,6 +10,13 @@ const requirements = makeResource(Requirement, {
   filters: ['hospitalId', 'status', 'type'],
   name: 'Requirement',
   idPrefix: 'HREQ',
+  ownerField: 'hospitalId',
+  allowedRoles: ['hospital', 'admin'],
+  beforeCreate: (data, req) => ({
+    ...data,
+    hospitalId: req.user?.role === 'admin' ? (data.hospitalId || req.user.orgId || req.user.id) : (req.user?.orgId || req.user.id),
+    status: data.status || 'active',
+  }),
 });
 
 // Specific paths before /:id

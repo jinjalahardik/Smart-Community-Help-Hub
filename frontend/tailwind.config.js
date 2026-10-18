@@ -41,8 +41,12 @@ export default {
         border: { DEFAULT: 'rgba(15, 118, 110, 0.14)' },
       },
       fontFamily: {
-        display: ['Plus Jakarta Sans', 'Outfit', 'sans-serif'],
+        display: ['Sora', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
+        sora: ['Sora', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
+        mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       boxShadow: {
         soft: '0 2px 8px -2px rgba(10, 74, 70, 0.08), 0 4px 16px -4px rgba(10, 74, 70, 0.06)',
@@ -72,6 +76,15 @@ export default {
         'scale-in': { '0%': { opacity: 0, transform: 'scale(0.96)' }, '100%': { opacity: 1, transform: 'scale(1)' } },
         shimmer: { '0%': { backgroundPosition: '-400px 0' }, '100%': { backgroundPosition: '400px 0' } },
         'pulse-soft': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.5 } },
+        'gradient-mesh': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        'fade-up': {
+          '0%': { opacity: 0, transform: 'translateY(16px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
         aurora: {
           '0%, 100%': { transform: 'translate(0%, 0%) scale(1)' },
           '33%': { transform: 'translate(5%, -8%) scale(1.08)' },
@@ -83,6 +96,8 @@ export default {
         'scale-in': 'scale-in 0.2s ease-out',
         shimmer: 'shimmer 1.6s infinite linear',
         'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
+        'gradient-mesh': 'gradient-mesh 8s ease infinite',
+        'fade-up': 'fade-up 0.7s ease-out forwards',
         aurora: 'aurora 14s ease-in-out infinite',
       },
     },

@@ -32,9 +32,38 @@ export function sendToRole(role, event, data, users) {
   }
 }
 
-export function sseHandler(req, res) {
-  const { userId } = req.query;
-  if (!userId) return res.status(400).json({ message: 'userId query parameter is required' });
+import jwt from 'jsonwebtoken';
+import { extractToken } from '../middleware/auth.js';
+import { User } from '../models/index.js';
+
+const DEV_SECRET = 'sch_hub_local_dev_secret_change_in_production';
+const JWT_SECRET = process.env.JWT_SECRET || DEV_SECRET;
+
+export async function sseHandler(req, res) {
+  const token = extractToken(req);
+  if (!token) {
+    return res.status(401).json({ message: 'Authentication required to subscribe to live events' });
+  }
+
+  let payload;
+  try {
+    payload = jwt.verify(token, JWT_SECRET);
+  } catch {
+    return res.status(401).json({ message: 'Invalid or expired session' });
+  }
+
+  const user = await User.findOne({ id: payload.userId });
+  if (!user || user.status === 'suspended') {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  // Target userId must match authenticated user, unless user is admin
+  const requestedUserId = req.query.userId || user.id;
+  if (user.role !== 'admin' && requestedUserId !== user.id) {
+    return res.status(403).json({ message: 'You do not have permission to subscribe to another user\'s events' });
+  }
+
+  const userId = requestedUserId;
 
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',

@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import { Target, Eye, HeartHandshake, Users, FileCheck2, ShieldCheck, ClipboardCheck, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Target, Eye, HeartHandshake, Users, FileCheck2, ShieldCheck, ClipboardCheck, Sparkles } from 'lucide-react';
 import Section, { SectionHeading } from '../../components/shared/Section';
 import { Card } from '../../components/ui/Card';
 import Avatar from '../../components/ui/Avatar';
 import Reveal, { RevealGroup, RevealItem } from '../../components/shared/Reveal';
+import { missionVisionImages } from '../../constants/cardImages';
 
 const TEAM = [
   { name: 'Kavita Mehta', role: 'Platform Administrator' },
@@ -40,21 +41,35 @@ export default function About() {
         </Reveal>
       </Section>
 
-      {/* MISSION & VISION GLASS CARDS */}
+      {/* MISSION & VISION IMAGE-BACKGROUND CARDS */}
       <Section className="pt-0">
         <RevealGroup className="grid sm:grid-cols-2 gap-8" stagger={0.12}>
           <RevealItem>
             <motion.div whileHover={{ y: -8, rotateX: 3, rotateY: -3 }} className="h-full [perspective:1000px]">
-              <div className="relative glass-card p-8 h-full rounded-[28px] border border-teal-200/60 dark:border-teal-400/20 bg-white/80 dark:bg-surface-card/90 backdrop-blur-2xl shadow-premium overflow-hidden group">
-                <div className="absolute -right-8 -top-8 w-40 h-40 rounded-full bg-teal-500/10 blur-2xl group-hover:scale-125 transition-transform" />
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center mb-6 shadow-glow-teal text-white">
-                    <Target className="w-7 h-7" />
+              <div className="group relative rounded-[28px] overflow-hidden min-h-[320px] md:min-h-[380px] cursor-pointer border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-500">
+                {/* 1. Background image */}
+                <img
+                  src={missionVisionImages.mission}
+                  alt="Volunteers packing surplus food boxes for community distribution"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+                {/* 2. Dark gradient - keeps text readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/15" />
+                {/* 3. Brand tint overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-900/30 via-transparent to-transparent" />
+
+                {/* 4. Content */}
+                <div className="relative z-10 h-full p-7 flex flex-col">
+                  <div className="w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-xl shadow-lg flex items-center justify-center">
+                    <Target className="w-6 h-6 text-teal-700" />
                   </div>
-                  <p className="font-display font-extrabold text-2xl text-ink-light dark:text-ink-dark">Our Mission</p>
-                  <p className="text-sm text-ink-light/75 dark:text-ink-dark/75 mt-3 leading-relaxed font-body">
-                    To eliminate the gap between surplus and scarcity by giving every community member a fast, transparent way to give or get help — food, clothes, medicine, blood, or emergency shelter.
-                  </p>
+                  <div className="mt-auto">
+                    <p className="font-display font-extrabold text-2xl text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] leading-tight">Our Mission</p>
+                    <p className="text-white/90 text-sm mt-3 leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] line-clamp-4">
+                      To eliminate the gap between surplus and scarcity by giving every community member a fast, transparent way to give or get help — food, clothes, medicine, blood, or emergency shelter.
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -62,16 +77,30 @@ export default function About() {
 
           <RevealItem>
             <motion.div whileHover={{ y: -8, rotateX: -3, rotateY: 3 }} className="h-full [perspective:1000px]">
-              <div className="relative glass-card p-8 h-full rounded-[28px] border border-amber-200/60 dark:border-amber-400/20 bg-white/80 dark:bg-surface-card/90 backdrop-blur-2xl shadow-premium overflow-hidden group">
-                <div className="absolute -right-8 -top-8 w-40 h-40 rounded-full bg-amber-500/10 blur-2xl group-hover:scale-125 transition-transform" />
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6 shadow-glow-amber text-white">
-                    <Eye className="w-7 h-7" />
+              <div className="group relative rounded-[28px] overflow-hidden min-h-[320px] md:min-h-[380px] cursor-pointer border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-500">
+                {/* 1. Background image */}
+                <img
+                  src={missionVisionImages.vision}
+                  alt="Diverse community members and volunteers working together"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+                {/* 2. Dark gradient - keeps text readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/15" />
+                {/* 3. Brand tint overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 via-transparent to-transparent" />
+
+                {/* 4. Content */}
+                <div className="relative z-10 h-full p-7 flex flex-col">
+                  <div className="w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-xl shadow-lg flex items-center justify-center">
+                    <Eye className="w-6 h-6 text-amber-700" />
                   </div>
-                  <p className="font-display font-extrabold text-2xl text-ink-light dark:text-ink-dark">Our Vision</p>
-                  <p className="text-sm text-ink-light/75 dark:text-ink-dark/75 mt-3 leading-relaxed font-body">
-                    A future where no verified request for help goes unanswered, powered by a network of trusted NGOs, hospitals and volunteers working from a shared, accountable platform.
-                  </p>
+                  <div className="mt-auto">
+                    <p className="font-display font-extrabold text-2xl text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] leading-tight">Our Vision</p>
+                    <p className="text-white/90 text-sm mt-3 leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] line-clamp-4">
+                      A future where no verified request for help goes unanswered, powered by a network of trusted NGOs, hospitals and volunteers working from a shared, accountable platform.
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

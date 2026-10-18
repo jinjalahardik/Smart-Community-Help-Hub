@@ -61,9 +61,10 @@ export default function Register() {
         toast.success('Registration submitted for verification!');
         navigate(role === ROLES.NGO ? PATHS.PENDING_NGO : PATHS.PENDING_HOSPITAL);
       } else {
-        await authService.registerBasic({ ...data, role });
+        const registered = await authService.registerBasic({ ...data, role });
+        const verifiedEmail = registered.user?.email || data.email;
         toast.success('Account created! Please verify your email.');
-        navigate(PATHS.VERIFY_EMAIL, { state: { email: data.email, mode: 'register' } });
+        navigate(PATHS.VERIFY_EMAIL, { state: { email: verifiedEmail, mode: 'register' } });
       }
     } catch (err) {
       toast.error(err.message || 'Registration failed');

@@ -9,7 +9,7 @@ import NotificationItem from '../../components/shared/NotificationItem';
 import { useAuth } from '../../context/AuthContext';
 import { useRequests } from '../../hooks/useRequests';
 import { useNotifications } from '../../hooks/useNotifications';
-import { useAdminNgos } from '../../hooks/useAdmin';
+import { usePublicNgos } from '../../hooks/useNgo';
 import { PATHS } from '../../routes/paths';
 import { REQUEST_CATEGORY_LABELS } from '../../constants/categories';
 import { timeAgo } from '../../utils/format';
@@ -28,7 +28,7 @@ export default function RequesterDashboard() {
   const { user } = useAuth();
   const { data: requests = [] } = useRequests({ requesterId: user.id });
   const { data: notifications = [] } = useNotifications(user.id);
-  const { data: ngos = [] } = useAdminNgos();
+  const { data: ngos = [] } = usePublicNgos();
   const ngoNameById = Object.fromEntries(ngos.map((n) => [n.id, n.name]));
 
   const active = requests.filter((r) => !['fulfilled', 'closed', 'rejected'].includes(r.status));

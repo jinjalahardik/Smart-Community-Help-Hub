@@ -4,7 +4,7 @@
 const PATTERNS = [
   {
     keywords: ['donate', 'donation', 'give', 'give away'],
-    response: 'To make a donation, log in as a Donor and go to the Donations page. You can donate food, clothes, medicine, or blood. Click "Create Donation" to get started.',
+    response: 'To make a donation, log in as a Donor and go to the Donations page. You can donate food, clothes, medicine, or blood. Click "Create Donation" to get started. You can also give money for an occasion via the Celebrate & Give page — quick give in a minute, no account needed, or start a celebration campaign so friends and family can contribute.',
   },
   {
     keywords: ['request', 'need help', 'help me', 'urgent'],
@@ -41,6 +41,14 @@ const PATTERNS = [
   {
     keywords: ['hello', 'hi', 'hey', 'good morning', 'good evening'],
     response: 'Hello! Welcome to Smart Community Help Hub. I can help you with questions about donations, requests, volunteering, NGOs, hospitals, and more. What would you like to know?',
+  },
+  {
+    keywords: ['celebrate', 'celebration', 'occasion', 'quick give', 'birthday give', 'wedding give', 'in memory'],
+    response: 'The Celebrate & Give page lets you turn any occasion — a birthday, wedding, graduation, new job, or in memory of someone — into a moment of hope. Pick a verified NGO and a cause (food, clothes, medicine, or blood), then either Quick Give or create a campaign so friends and family can contribute. Contributions start at ₹10.',
+  },
+  {
+    keywords: ['quick give', 'give in a minute', 'donate money'],
+    response: 'Quick Give is the fastest way to support a verified NGO for any occasion — no account, no campaign needed. Pick an occasion, choose a cause and NGO, enter an amount (₹10 to ₹1,00,000), and confirm. You get a payment receipt instantly.',
   },
   {
     keywords: ['thank', 'thanks'],

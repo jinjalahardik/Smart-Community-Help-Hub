@@ -25,6 +25,15 @@ const FAQ = lazy(() => import('./pages/public/FAQ'));
 const Privacy = lazy(() => import('./pages/public/Privacy'));
 const Terms = lazy(() => import('./pages/public/Terms'));
 
+// Celebrate & Give pages
+const CelebrateIndex = lazy(() => import('./pages/celebrate/CelebrateIndex'));
+const QuickGive = lazy(() => import('./pages/celebrate/QuickGive'));
+const CampaignDetail = lazy(() => import('./pages/celebrate/CampaignDetail'));
+const CreateCampaign = lazy(() => import('./pages/celebrate/CreateCampaign'));
+const MyCampaigns = lazy(() => import('./pages/celebrate/MyCampaigns'));
+const DonationComplete = lazy(() => import('./pages/celebrate/DonationComplete'));
+const GuestReceipts = lazy(() => import('./pages/celebrate/GuestReceipts'));
+
 // Auth pages
 const Login = lazy(() => import('./pages/auth/Login'));
 const Register = lazy(() => import('./pages/auth/Register'));
@@ -139,6 +148,11 @@ export default function App() {
           <Route path={PATHS.FAQ} element={<FAQ />} />
           <Route path={PATHS.PRIVACY} element={<Privacy />} />
           <Route path={PATHS.TERMS} element={<Terms />} />
+          <Route path={PATHS.CELEBRATE.INDEX} element={<CelebrateIndex />} />
+          <Route path={PATHS.CELEBRATE.GIVE} element={<QuickGive />} />
+          <Route path={PATHS.CELEBRATE.CAMPAIGN()} element={<CampaignDetail />} />
+          <Route path={PATHS.CELEBRATE.COMPLETE} element={<DonationComplete />} />
+          <Route path={PATHS.CELEBRATE.RECEIPTS} element={<GuestReceipts />} />
         </Route>
 
         {/* Guest-only auth pages */}
@@ -165,6 +179,8 @@ export default function App() {
             <Route path={PATHS.SETTINGS} element={<Settings />} />
             <Route path={PATHS.NOTIFICATIONS} element={<Notifications />} />
             <Route path={PATHS.CHAT} element={<Chat />} />
+            <Route path={PATHS.CELEBRATE.CREATE} element={<CreateCampaign />} />
+            <Route path={PATHS.CELEBRATE.MINE} element={<MyCampaigns />} />
 
             {/* Donor */}
             <Route element={<RoleGuard allowedRoles={[ROLES.DONOR]} />}>

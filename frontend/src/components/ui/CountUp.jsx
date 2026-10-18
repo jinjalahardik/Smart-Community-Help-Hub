@@ -27,9 +27,16 @@ export default function CountUp({ value, duration = 0.9, className }) {
   );
 
   useEffect(() => {
-    if (!isInView || !parsed) return;
-    const controls = animate(motionVal, parsed.number, { duration, ease: [0.22, 1, 0.36, 1] });
-    return () => controls.stop();
+    if (!parsed) return;
+    if (isInView) {
+      // Reset to 0 then run the count-up exactly once per reveal.
+      motionVal.set(0);
+      const controls = animate(motionVal, parsed.number, { duration, ease: [0.22, 1, 0.36, 1] });
+      return () => controls.stop();
+    }
+    // Not yet in view (or IntersectionObserver unavailable): show the final
+    // value immediately so counters never look broken as "0+" / "0%".
+    motionVal.set(parsed.number);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isInView, value]);
 

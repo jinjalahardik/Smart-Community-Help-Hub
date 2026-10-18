@@ -38,6 +38,7 @@ export default function LoginVisual() {
       >
         <Link
           to={PATHS.HOME}
+          aria-label="Go to Smart Community Help Hub home"
           className="group relative flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(45,212,191,0.3)]"
         >
           <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 text-white shadow-[0_0_16px_rgba(45,212,191,0.45)]">

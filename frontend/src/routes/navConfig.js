@@ -2,7 +2,7 @@ import {
   LayoutDashboard, HeartHandshake, ListChecks, MapPin, TrendingUp, MessageSquareHeart,
   Boxes, Users, ClipboardList, Truck, BarChart3, Building2, ShieldCheck, Settings,
   PackagePlus, Siren, Radar, CheckCircle2, Award, CalendarClock, Droplet, Pill,
-  FileWarning, HandCoins, FileClock, Megaphone, ScrollText,
+  FileWarning, HandCoins, FileClock, Megaphone, ScrollText, PartyPopper,
 } from 'lucide-react';
 import { ROLES } from '../constants/roles';
 import { PATHS } from './paths';
@@ -12,6 +12,8 @@ export const NAV_CONFIG = {
     { label: 'Dashboard', to: PATHS.DONOR.DASHBOARD, icon: LayoutDashboard },
     { label: 'My Donations', to: PATHS.DONOR.DONATIONS, icon: HeartHandshake },
     { label: 'Create Donation', to: PATHS.DONOR.CREATE, icon: PackagePlus },
+    { label: 'Celebrate & Give', to: PATHS.CELEBRATE.GIVE, icon: PartyPopper },
+    { label: 'My Campaigns', to: PATHS.CELEBRATE.MINE, icon: Award },
     { label: 'Nearby Requests', to: PATHS.DONOR.NEARBY, icon: MapPin },
     { label: 'Impact History', to: PATHS.DONOR.IMPACT, icon: TrendingUp },
     { label: 'Feedback', to: PATHS.DONOR.FEEDBACK, icon: MessageSquareHeart },

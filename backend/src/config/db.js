@@ -24,6 +24,19 @@ export async function connectDB(uri = process.env.MONGODB_URI) {
     );
     return conn.connection;
   } catch (error) {
+    if (uri !== 'mongodb://127.0.0.1:27017/sch_hub') {
+      try {
+        console.log('[mongodb] Remote Atlas cluster unreachable, trying local MongoDB fallback at 127.0.0.1:27017...');
+        const localConn = await mongoose.connect('mongodb://127.0.0.1:27017/sch_hub', {
+          ...CONNECT_OPTS,
+          serverSelectionTimeoutMS: 2500,
+        });
+        console.log(`[mongodb] Local MongoDB Connected: ${localConn.connection.host} / DB: ${localConn.connection.name}`);
+        return localConn.connection;
+      } catch {
+        // Fall through to error logs
+      }
+    }
     console.error(`MongoDB Atlas Connection Error: ${error.message}`);
 
     if (

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Radar, Award, CalendarClock, Truck, ArrowRight, Star, Clock, MapPin,
-  PackageCheck, Trophy, Sparkles, Flame, CheckCircle2, Siren, UserCheck,
+  PackageCheck, Trophy, Sparkles, Flame, CheckCircle2, UserCheck,
 } from 'lucide-react';
 import Section, { SectionHeading } from '../../components/shared/Section';
 import { Card } from '../../components/ui/Card';

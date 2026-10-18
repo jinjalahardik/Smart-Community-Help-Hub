@@ -15,11 +15,11 @@ export default function ForgotPassword() {
 
   const onSubmit = async ({ email }) => {
     try {
-      await authService.requestOtp(email);
-      toast.success('OTP sent to your email (demo OTP: 123456)');
+      await authService.requestOtp(email, 'reset_password');
+      toast.success('Verification code sent to your email');
       navigate(PATHS.VERIFY_EMAIL, { state: { email, mode: 'reset' } });
     } catch (err) {
-      toast.error(err.message || 'Failed to send OTP');
+      toast.error(err?.response?.data?.message || err?.message || 'Failed to send verification code');
     }
   };
 

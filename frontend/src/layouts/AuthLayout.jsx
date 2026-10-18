@@ -63,7 +63,7 @@ export default function AuthLayout() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <Link to={PATHS.HOME} className="relative flex items-center gap-2.5 text-white">
+          <Link to={PATHS.HOME} aria-label="Go to Smart Community Help Hub home" className="relative flex items-center gap-2.5 text-white">
             <div className="w-10 h-10 rounded-xl glass-panel flex items-center justify-center">
               <HeartHandshake className="w-5 h-5" />
             </div>

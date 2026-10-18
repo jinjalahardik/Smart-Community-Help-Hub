@@ -8,26 +8,26 @@ import Button from '../../components/ui/Button';
 import { PATHS } from '../../routes/paths';
 import { useAuth } from '../../context/AuthContext';
 import Reveal, { RevealGroup, RevealItem } from '../../components/shared/Reveal';
-import { cn } from '../../utils/cn';
+import { donationCategoryImages } from '../../constants/cardImages';
 
 const CATEGORIES = [
   {
-    icon: HandHeart, title: 'Food Donations', color: 'bg-teal-50 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300', gradient: 'from-teal-50 to-white dark:from-teal-900/20 dark:to-transparent',
+    icon: HandHeart, title: 'Food Donations', image: donationCategoryImages.food, iconColor: 'text-amber-700', tint: 'bg-gradient-to-br from-amber-900/40 via-orange-800/20 to-transparent',
     points: ['Cooked meals from events or restaurants', 'Dry ration kits (rice, dal, oil, flour)', 'Packaged and hygienically sealed items only', 'Same-day pickup for perishables'],
     warning: 'Do not donate food past its safe consumption window — perishables must be picked up within hours of preparation.',
   },
   {
-    icon: Shirt, title: 'Clothes Donations', color: 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300', gradient: 'from-amber-50 to-white dark:from-amber-900/20 dark:to-transparent',
+    icon: Shirt, title: 'Clothes Donations', image: donationCategoryImages.clothes, iconColor: 'text-cyan-700', tint: 'bg-gradient-to-br from-cyan-900/40 via-sky-800/20 to-transparent',
     points: ['Gently used clothing for all ages', 'Seasonal wear including winter jackets', 'Sorted by gender, age group and size', 'Distributed through verified NGOs'],
     warning: 'Please wash items before donating and avoid torn or heavily worn clothing.',
   },
   {
-    icon: Pill, title: 'Medicine Donations', color: 'bg-coral-50 text-coral-700 dark:bg-coral-900/30 dark:text-coral-300', gradient: 'from-coral-50 to-white dark:from-coral-900/20 dark:to-transparent',
+    icon: Pill, title: 'Medicine Donations', image: donationCategoryImages.medicine, iconColor: 'text-rose-700', tint: 'bg-gradient-to-br from-rose-900/40 via-pink-800/20 to-transparent',
     points: ['Unexpired, sealed medicines only', 'Batch number and manufacturer required', 'Prescription medicines flagged clearly', 'Routed to hospitals and NGO health camps'],
     warning: 'Never donate expired, opened, or unlabelled medication — it will be rejected during NGO/hospital review.',
   },
   {
-    icon: Droplet, title: 'Blood Donations', color: 'bg-teal-50 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300', gradient: 'from-teal-100 to-white dark:from-teal-800/20 dark:to-transparent',
+    icon: Droplet, title: 'Blood Donations', image: donationCategoryImages.blood, iconColor: 'text-red-700', tint: 'bg-gradient-to-br from-red-900/45 via-red-800/20 to-transparent',
     points: ['Coordinated directly with partner hospitals', 'Medical eligibility self-declaration required', 'Blood group and availability tracked', 'Priority routing for critical requirements'],
     warning: 'Ensure at least 90 days have passed since your last blood donation before pledging again.',
   },
@@ -43,17 +43,30 @@ const PROGRESS_STEPS = [
 function CategoryCard({ c, index }) {
   const [open, setOpen] = useState(index === 0);
   return (
-    <Card hover className={cn('h-full overflow-hidden bg-gradient-to-b', c.gradient)}>
-      <div className="p-7">
-        <div className={`w-12 h-12 rounded-2xl ${c.color} flex items-center justify-center mb-4`}>
-          <c.icon className="w-6 h-6" />
+    <div className="group relative rounded-[28px] overflow-hidden min-h-[360px] h-full cursor-pointer border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-500">
+      {/* 1. Background image */}
+      <img
+        src={c.image}
+        alt={c.title}
+        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        loading="lazy"
+      />
+      {/* 2. Dark gradient - keeps text readable */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/15" />
+      {/* 3. Brand tint overlay */}
+      <div className={`absolute inset-0 ${c.tint}`} />
+
+      {/* 4. Content */}
+      <div className="relative z-10 p-7 flex flex-col h-full">
+        <div className="w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-xl shadow-lg flex items-center justify-center mb-4">
+          <c.icon className={`w-6 h-6 ${c.iconColor}`} />
         </div>
-        <p className="font-display font-semibold text-lg">{c.title}</p>
+        <p className="font-display font-semibold text-lg text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{c.title}</p>
 
         <button
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
-          className="flex items-center gap-1.5 text-xs font-medium text-teal-600 dark:text-teal-300 mt-2 hover:underline"
+          className="flex items-center gap-1.5 text-xs font-medium text-white/90 mt-2 hover:underline hover:text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
         >
           What can be donated
           <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}><ChevronDown className="w-3.5 h-3.5" /></motion.span>
@@ -70,8 +83,8 @@ function CategoryCard({ c, index }) {
             >
               <ul className="mt-3 space-y-2">
                 {c.points.map((p) => (
-                  <li key={p} className="text-sm text-ink-light/65 dark:text-ink-dark/65 flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-teal-500 mt-1.5 shrink-0" /> {p}
+                  <li key={p} className="text-sm text-white/90 flex items-start gap-2 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400 mt-1.5 shrink-0" /> {p}
                   </li>
                 ))}
               </ul>
@@ -79,12 +92,12 @@ function CategoryCard({ c, index }) {
           )}
         </AnimatePresence>
 
-        <div className="flex items-start gap-2 mt-4 text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 rounded-xl px-3 py-2.5">
+        <div className="flex items-start gap-2 mt-4 text-xs text-amber-800 bg-amber-50/90 backdrop-blur-md rounded-xl px-3 py-2.5">
           <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
           {c.warning}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
 

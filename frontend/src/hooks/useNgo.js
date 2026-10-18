@@ -2,6 +2,10 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { ngoService } from '../features/ngo/ngoService';
 
+export function usePublicNgos() {
+  return useQuery({ queryKey: ['public-ngos'], queryFn: ngoService.publicNgos });
+}
+
 export function useNgoProfile(orgId) {
   return useQuery({ queryKey: ['ngo-profile', orgId], queryFn: () => ngoService.getProfile(orgId), enabled: !!orgId });
 }

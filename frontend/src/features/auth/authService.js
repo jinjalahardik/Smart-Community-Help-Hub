@@ -39,7 +39,7 @@ export const authService = {
 
   async registerBasic(payload) {
     const { data } = await api.post('/auth/register/basic', payload);
-    return data.user;
+    return data;
   },
 
   async registerOrg(payload) {
@@ -47,13 +47,13 @@ export const authService = {
     return data;
   },
 
-  async requestOtp(email) {
-    const { data } = await api.post('/auth/request-otp', { email });
+  async requestOtp(email, purpose = 'verify_email') {
+    const { data } = await api.post('/auth/request-otp', { email, purpose });
     return data;
   },
 
-  async verifyOtp(email, otp) {
-    const { data } = await api.post('/auth/verify-otp', { email, otp });
+  async verifyOtp(email, otp, purpose = 'verify_email') {
+    const { data } = await api.post('/auth/verify-otp', { email, otp, purpose });
     return data;
   },
 

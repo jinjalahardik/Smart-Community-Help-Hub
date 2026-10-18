@@ -1,6 +1,11 @@
 import { api } from '../../services/api';
 
 export const ngoService = {
+  async publicNgos() {
+    const { data } = await api.get('/ngos/public');
+    return data;
+  },
+
   async getProfile(orgId) {
     const { data } = await api.get(`/ngos/${orgId}`);
     return data;

@@ -27,6 +27,16 @@ export const PATHS = {
   NOTIFICATIONS: '/notifications',
   CHAT: '/chat',
 
+  CELEBRATE: {
+    INDEX: '/celebrate',
+    GIVE: '/celebrate/give',
+    CREATE: '/celebrate/create',
+    MINE: '/celebrate/mine',
+    CAMPAIGN: (slug = ':slug') => `/celebrate/c/${slug}`,
+    COMPLETE: '/celebrate/complete',
+    RECEIPTS: '/celebrate/receipts',
+  },
+
   DONOR: {
     DASHBOARD: '/donor/dashboard',
     DONATIONS: '/donor/donations',

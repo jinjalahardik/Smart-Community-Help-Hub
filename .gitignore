@@ -1,0 +1,16 @@
+# Report artifacts (not application source)
+*.docx
+artifacts_img/
+build_reporting4_docx.py
+generate_architecture_diagram.py
+
+# Node
+node_modules/
+
+# Environment (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log

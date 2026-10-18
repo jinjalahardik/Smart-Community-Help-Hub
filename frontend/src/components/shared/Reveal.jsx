@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { cn } from '../../utils/cn';
 
 const OFFSETS = {
   up: { y: 22 },
@@ -44,7 +45,7 @@ export function RevealItem({ children, className, direction = 'up' }) {
   const offset = OFFSETS[direction] || {};
   return (
     <motion.div
-      className={className}
+      className={cn('min-w-0', className)}
       variants={{ hidden: { opacity: 0, ...offset }, show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } } }}
     >
       {children}
